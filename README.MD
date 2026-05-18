@@ -1,0 +1,1 @@
+Arrays covered low,medium, and high
