@@ -41,17 +41,17 @@ public class Arrays_Easy {
         return  secondSmallest;
     }
 
-//    public static int[]a removeDuplicates(int[] a){
-//    // Two pointer example
-//        int i = 0;
-//            for(int j = 1;i<a.length;i++){
-//                if(a[j]!=a[i]){
-//                    a[i+1]=a[j];
-//                    i++;
-//                }
-//            }
-//        return ;
-//    }
+    public static int removeDuplicates(int[] a){
+    // Two pointer example
+     int i = 0;
+        for(int j=1;j<a.length;j++){
+            if(a[j]!=a[i]){
+               a[i+1]=a[j];
+               i++;
+            }
+        }
+        return i+1;
+    }
 
     public static boolean isSorted(int []a){
         for(int i = 0;i<a.length-1;i++){
@@ -61,6 +61,17 @@ public class Arrays_Easy {
 
     }
 
+    public static void singleLeftRotateArray(int[] a){
+        int temp = a[0];
+        for(int i =1;i<a.length-1;i++) {
+            a[i-1] = a[i];
+        }
+        a[a.length-1] =temp;
+    }
+
+    public static void leftRotationByN(int a[],int n){
+
+    }
 
 
     public static Vector<Integer> getSeconOrderElements(Vector<Integer> a,int n){
@@ -70,6 +81,12 @@ public class Arrays_Easy {
     }
 
     static void main(String[] args) {
-        System.out.println(getSeconOrderElements(new Vector<>(Arrays.asList(6,1,7,6,2)),5));
+//        System.out.println(getSeconOrderElements(new Vector<>(Arrays.asList(6,1,7,6,2)),5));
+        int a[] = new int[]{1,1,2,2,3,3,4,4,4,5,5,5};
+//        int last = removeDuplicates(a);
+        singleLeftRotateArray(a);
+        for(int i = 0;i<a.length;i++){
+            System.out.print(a[i]+", ");
+        }
     }
 }
