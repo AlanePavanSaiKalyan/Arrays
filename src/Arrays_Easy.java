@@ -67,10 +67,53 @@ public class Arrays_Easy {
             a[i-1] = a[i];
         }
         a[a.length-1] =temp;
+
     }
 
     public static void leftRotationByN(int a[],int n){
+        //Bruteforce
+        int d = n%a.length;
+        int temp[] = new int[d];
+        for(int i = 0;i<d;i++){
+            temp[i] = a[i];
+        }
+        for(int i = d;i<a.length;i++){
+            a[i-d] =  a[i];
+        }
+        for (int i = a.length-d;i<a.length;i++ ){
+            a[i] = temp[i-(a.length-d)];
+        }
+    }
 
+    public static void leftRotationByN_optimal(int[] a,int d){
+        d = d%a.length;
+        reverse(a,0,d-1);
+        reverse(a,d,a.length-1);
+        reverse(a,0,a.length-1);
+    }
+
+    public static void reverse(int[]a,int start,int end){
+        while (start<=end){
+            int temp = a[start];
+            a[start] = a[end];
+            a[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+    public static void rightRotationByN(int []a, int k){
+        int d = k%a.length;
+        int temp[] = new int[d];
+        for(int i = a.length-d;i<a.length;i++){
+            temp[i-(a.length-d)] = a[i];
+        }
+        for(int i = a.length-d-1;i>=0;i--){
+            a[i+d] = a[i];
+        }
+        for(int i =0;i<d;i++){
+            a[i] = temp[i];
+        }
     }
 
 
@@ -84,7 +127,7 @@ public class Arrays_Easy {
 //        System.out.println(getSeconOrderElements(new Vector<>(Arrays.asList(6,1,7,6,2)),5));
         int a[] = new int[]{1,1,2,2,3,3,4,4,4,5,5,5};
 //        int last = removeDuplicates(a);
-        singleLeftRotateArray(a);
+        rightRotationByN(a,15);
         for(int i = 0;i<a.length;i++){
             System.out.print(a[i]+", ");
         }
