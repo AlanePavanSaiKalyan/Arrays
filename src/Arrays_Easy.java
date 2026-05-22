@@ -102,8 +102,8 @@ public class Arrays_Easy {
         }
     }
 
-    public static void rightRotationByN(int []a, int k){
-        int d = k%a.length;
+    public static void rightRotationByN(int []a,int n){
+        int d = n%a.length;
         int temp[] = new int[d];
         for(int i = a.length-d;i<a.length;i++){
             temp[i-(a.length-d)] = a[i];
@@ -111,11 +111,51 @@ public class Arrays_Easy {
         for(int i = a.length-d-1;i>=0;i--){
             a[i+d] = a[i];
         }
-        for(int i =0;i<d;i++){
+        for(int i = 0;i<temp.length;i++){
             a[i] = temp[i];
         }
+
     }
 
+    public static void rightRotationByNOptimal(int[] a,int n){
+        int d= n%a.length;
+        reverse(a,0,a.length-d-1);
+        reverse(a,a.length-d,a.length-1);
+        reverse(a,0,a.length-1);
+    }
+
+    public static void pushZeroesToEnd(int[] a){
+        int temp[] = new int[a.length];
+        int j = 0;
+        for(int  i = 0;i<a.length;i++){
+            if(a[i]!=0){
+                temp[j++] = a[i];
+            }
+        }
+        for(int i = 0;i<a.length;i++){
+            a[i] = temp[i];
+        }
+
+    }
+
+    public static void pushZeroesToEndOptimal(int[]a){
+        int start = 0;
+        for(int i = 0;i<a.length;i++){
+            if(a[i] == 0){
+                start = i;
+                break;
+            }
+        }
+        for(int i = start+1;i<a.length;i++){
+            if( a[i] !=0){
+              int temp =   a[start];
+              a[start] = a[i];
+              a[i]  = temp;
+              start++;
+            }
+
+        }
+    }
 
     public static Vector<Integer> getSeconOrderElements(Vector<Integer> a,int n){
         int secondLargest = getSecondLargest(a,n);
@@ -125,9 +165,9 @@ public class Arrays_Easy {
 
     static void main(String[] args) {
 //        System.out.println(getSeconOrderElements(new Vector<>(Arrays.asList(6,1,7,6,2)),5));
-        int a[] = new int[]{1,1,2,2,3,3,4,4,4,5,5,5};
+        int a[] = new int[]{0,0,4,3,5,0,5,4,1,3,0};
 //        int last = removeDuplicates(a);
-        rightRotationByN(a,15);
+        pushZeroesToEndOptimal(a);
         for(int i = 0;i<a.length;i++){
             System.out.print(a[i]+", ");
         }
