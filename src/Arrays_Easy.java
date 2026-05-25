@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Vector;
 
@@ -125,37 +126,50 @@ public class Arrays_Easy {
     }
 
     public static void pushZeroesToEnd(int[] a){
-        int temp[] = new int[a.length];
-        int j = 0;
-        for(int  i = 0;i<a.length;i++){
+        ArrayList<Integer> temp = new ArrayList<>();
+        for(int i = 0;i<a.length;i++){
             if(a[i]!=0){
-                temp[j++] = a[i];
+                temp.add(a[i]);
             }
         }
-        for(int i = 0;i<a.length;i++){
-            a[i] = temp[i];
+        for(int i = 0;i<temp.size();i++){
+            a[i] = temp.get(i);
+        }
+        for(int i = temp.size();i<a.length;i++){
+            a[i] = 0;
         }
 
     }
+//
+//    public static int[] union(int[] a,int[] b){
+//        ArrayList<Integer> res= new ArrayList<>();
+//        int j = 0;
+//       int i = 0;
+//       while(i<a.length && j<b.length){
+//
+//       }
+//    }
 
     public static void pushZeroesToEndOptimal(int[]a){
-        int start = 0;
-        for(int i = 0;i<a.length;i++){
-            if(a[i] == 0){
-                start = i;
-                break;
-            }
-        }
-        for(int i = start+1;i<a.length;i++){
-            if( a[i] !=0){
-              int temp =   a[start];
+      int start = -1;
+      for(int i = 0;i<a.length;i++){
+          if(a[i] == 0){
+              start = i;
+              break;
+          }
+      }
+      if(start == -1) return;
+      for(int i = start+1;i<a.length;i++){
+          if(a[i]!=0){
+              int temp = a[start];
               a[start] = a[i];
-              a[i]  = temp;
+              a[i] = temp;
               start++;
-            }
-
-        }
+      }
+      }
     }
+
+
 
     public static Vector<Integer> getSeconOrderElements(Vector<Integer> a,int n){
         int secondLargest = getSecondLargest(a,n);
@@ -167,7 +181,7 @@ public class Arrays_Easy {
 //        System.out.println(getSeconOrderElements(new Vector<>(Arrays.asList(6,1,7,6,2)),5));
         int a[] = new int[]{0,0,4,3,5,0,5,4,1,3,0};
 //        int last = removeDuplicates(a);
-        pushZeroesToEndOptimal(a);
+        pushZeroesToEnd(a);
         for(int i = 0;i<a.length;i++){
             System.out.print(a[i]+", ");
         }
