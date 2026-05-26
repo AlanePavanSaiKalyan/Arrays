@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Vector;
+import java.util.*;
 
 public class Arrays_Easy {
     public static int getLargest(int []a){
@@ -150,6 +148,65 @@ public class Arrays_Easy {
 //       }
 //    }
 
+    public static List<Integer> unionBruteforce(int a[],int b[]){
+        Set<Integer> set = new TreeSet<>();
+        int n1 = a.length;
+        int n2 = b.length;
+        for(int i = 0;i<n1;i++) {
+            set.add(a[i]);
+        }
+        for(int j = 0;j<n2;j++){
+            set.add(b[j]);
+        }
+        return new ArrayList<>(set);
+
+    }
+
+    public static List<Integer> unionOptimal(int a[],int b[]){
+        List<Integer> union = new ArrayList<>();
+        int i = 0;
+        int j = 0;
+        int n1= a.length;
+        int n2 = b.length;
+
+        while(i<n1 && j<n2){
+            if(a[i]<b[j]){
+                if(union.isEmpty() || union.get(union.size()-1)!=a[i]){
+                    union.add(a[i]);
+
+                }
+                i++;
+            }
+           else if(a[i]>b[j]){
+                if(union.isEmpty() || union.get(union.size()-1) != b[j]){
+                    union.add(b[j]);
+
+                }
+                j++;
+            }
+            else {
+               if(union.isEmpty() || union.get(union.size()-1)!=a[i]){
+                   union.add(a[i]);
+                               } i++;
+                j++;
+            }
+        }
+
+        while (i<n1){
+            if(union.isEmpty() || union.get(union.size()-1)!=a[i]){
+                union.add(a[i]);
+            }
+            i++;
+        }
+        while (j<n2){
+            if(union.isEmpty() || union.get(union.size()-1)!=b[j]){
+                union.add(b[j]);
+            }
+            j++;
+        }
+        return union;
+    }
+
     public static void pushZeroesToEndOptimal(int[]a){
       int start = -1;
       for(int i = 0;i<a.length;i++){
@@ -179,11 +236,14 @@ public class Arrays_Easy {
 
     static void main(String[] args) {
 //        System.out.println(getSeconOrderElements(new Vector<>(Arrays.asList(6,1,7,6,2)),5));
-        int a[] = new int[]{0,0,4,3,5,0,5,4,1,3,0};
-//        int last = removeDuplicates(a);
-        pushZeroesToEnd(a);
-        for(int i = 0;i<a.length;i++){
-            System.out.print(a[i]+", ");
-        }
+        int a[] = new int[]{1,1,2,3,4,6,8};
+        int b[] = new  int[]{1,2,3,4,5,6,7};
+ //        int last = removeDuplicates(a);
+//        pushZeroesToEnd(a);
+        ArrayList<Integer> res= new ArrayList<>(unionOptimal(a,b));
+//        for(int i = 0;i<a.length;i++){
+//            System.out.print(a[i]+", ");
+//        }
+        System.out.println(res);
     }
 }
