@@ -138,15 +138,49 @@ public class Arrays_Easy {
         }
 
     }
-//
-//    public static int[] union(int[] a,int[] b){
-//        ArrayList<Integer> res= new ArrayList<>();
-//        int j = 0;
-//       int i = 0;
-//       while(i<a.length && j<b.length){
-//
-//       }
-//    }
+
+
+    public static List<Integer> intersectionBruteforce(int a[],int b[]){
+        List<Integer> intersection = new ArrayList<>();
+        int n1 = a.length;
+        int n2 = b.length;
+        for(int i = 0;i<n1;i++){
+            for(int j = 0;j<n2;j++){
+                if(a[i] == b[j]){
+                    if(intersection.isEmpty() || intersection.get(intersection.size()-1) !=a[i]){
+                        intersection.add(a[i]);
+                        break;
+                    }
+                }
+                if(b[j]>a[i]){
+                    break;
+                }
+            }
+        }
+        return intersection;
+    }
+
+    public static List<Integer> intersectionOptimal(int a[],int b[]){
+        List<Integer> intersection = new ArrayList<>();
+        int j = 0;
+        int i = 0;
+        int n = a.length;
+        int m = b.length;
+        while(i<n && j<m){
+            if(a[i] <b[j]){
+                i++;
+            }
+            else if(a[i]>b[j]){
+                j++;
+            }
+            else{
+                    intersection.add(a[i]);
+                    i++;
+                    j++;
+            }
+        }
+        return intersection;
+    }
 
     public static List<Integer> unionBruteforce(int a[],int b[]){
         Set<Integer> set = new TreeSet<>();
@@ -240,7 +274,7 @@ public class Arrays_Easy {
         int b[] = new  int[]{1,2,3,4,5,6,7};
  //        int last = removeDuplicates(a);
 //        pushZeroesToEnd(a);
-        ArrayList<Integer> res= new ArrayList<>(unionOptimal(a,b));
+        ArrayList<Integer> res= new ArrayList<>(intersectionOptimal(a,b));
 //        for(int i = 0;i<a.length;i++){
 //            System.out.print(a[i]+", ");
 //        }
