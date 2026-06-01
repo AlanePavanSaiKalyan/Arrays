@@ -182,6 +182,18 @@ public class Arrays_Easy {
         return intersection;
     }
 
+
+    public static int missingNumber(int[] a,int n){
+        int xor1=0;;
+        int xor2=0;
+        for(int i = 0;i<a.length;i++) {
+            xor2^=a[i];
+            xor1^=i+1;
+
+        }
+        xor1^=n;
+        return xor1^xor2;
+    }
     public static List<Integer> unionBruteforce(int a[],int b[]){
         Set<Integer> set = new TreeSet<>();
         int n1 = a.length;
@@ -270,14 +282,15 @@ public class Arrays_Easy {
 
     static void main(String[] args) {
 //        System.out.println(getSeconOrderElements(new Vector<>(Arrays.asList(6,1,7,6,2)),5));
-        int a[] = new int[]{1,1,2,3,4,6,8};
-        int b[] = new  int[]{1,2,3,4,5,6,7};
+//        int a[] = new int[]{1,1,2,3,4,6,8};
+//        int b[] = new  int[]{1,2,3,4,5,6,7};
  //        int last = removeDuplicates(a);
 //        pushZeroesToEnd(a);
-        ArrayList<Integer> res= new ArrayList<>(intersectionOptimal(a,b));
+//        ArrayList<Integer> res= new ArrayList<>(intersectionOptimal(a,b));
 //        for(int i = 0;i<a.length;i++){
 //            System.out.print(a[i]+", ");
 //        }
-        System.out.println(res);
+//        System.out.println(res);
+        System.out.println(missingNumber(new int[]{1,4,3,5},5));
     }
 }
