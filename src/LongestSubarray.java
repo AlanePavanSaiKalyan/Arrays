@@ -16,11 +16,7 @@ public class LongestSubarray {
         return len;
     }
 
-    public static int longestSubArrayBetter(int[] a,int k){
-        //Hashing prefix sum
-        int len = 0;
 
-    }
 
     static void main(String[] args) {
         int[] a = new int[]{1,2,3,1,1,1,1,4,2,3};
